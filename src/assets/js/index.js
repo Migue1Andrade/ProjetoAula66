@@ -1,48 +1,53 @@
- const clock = document.querySelector('.clock');
- const beggin = document.querySelector('.beggin');
- const stoper = document.querySelector('.stoper');
- const restart = document.querySelector('.restart');
- 
- let seconds = 0; 
- let cont = 0; 
- let timer; 
- let data;
+const clock = document.querySelector('.clock');
+const beggin = document.querySelector('.beggin');
+const stoper = document.querySelector('.stoper');
+const restart = document.querySelector('.restart');
 
-	function hour(seconds) {
-		data = new Date(seconds * 1000);
-	 
-		return data.toLocaleTimeString('pt-BR', {
-		  hour12: false,
-		  timeZone: 'GMT'
-		});
-	}  
+let seconds = 0; 
+let cont = 0; 
+let timer; 
+let data;
 
-	function restartClock() {
-		clearInterval(timer);
-		seconds = seconds - seconds;
-		clock.innerHTML = '00:00:00';
-	}
- 
-	function startClock() {
-	  timer = setInterval(() => {
-		  seconds++; 
-		  clock.innerHTML = hour(seconds); 
-		}, 1000);
-	}   
-
-	beggin.addEventListener('click', function(event) {
-		while(cont!=1){
-		 startClock(); 
-		 cont++;
-		 return; 
-		}
+function hour(seconds) {
+	data = new Date(seconds * 1000);
+	
+	return data.toLocaleTimeString('pt-BR', {
+		hour12: false,
+		timeZone: 'GMT'
 	});
+}  
 
- stoper.addEventListener('click', function(event) {
-	 clearInterval(timer); 
-	 cont = cont - cont; 
- });
+function restartClock() {
+	clearInterval(timer);
 
- restart.addEventListener('click', function(event) {
-	 restartClock(); 
- });
+	seconds = seconds - seconds;
+	clock.innerHTML = '00:00:00';
+}
+
+function startClock() {
+	timer = setInterval(() => {
+		seconds++; 
+		clock.innerHTML = hour(seconds); 
+	}, 1000);
+}
+
+beggin.addEventListener('click', function(event) {		
+	while(cont !==1){
+		startClock(); 
+
+		cont++;
+		return; 
+	}
+});
+
+stoper.addEventListener('click', function(event) {
+	clearInterval(timer); 
+
+	cont = 0; 
+});
+
+restart.addEventListener('click', function(event) {
+	restartClock();
+
+	cont = 0; 
+});
