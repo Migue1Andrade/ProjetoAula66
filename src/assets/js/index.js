@@ -2,39 +2,47 @@
  const beggin = document.querySelector('.beggin');
  const stoper = document.querySelector('.stoper');
  const restart = document.querySelector('.restart');
- let seconds = 0; 
- let timer; 
-
- function hour(seconds){
-    let data = new Date(seconds * 1000);
-    return data.toLocaleTimeString('pt-BR', {
-        hour12: false,
-        timeZone: 'GMT'
-    });
-}  
-
-    function restartClock(){
-        clearInterval(timer);
-        seconds = seconds - seconds;
-        clock.innerHTML = '00:00:00';
-        startClock(); 
-    }
  
- function startClock() {
-     timer = setInterval(() => {
-        seconds++; 
-        clock.innerHTML = hour(seconds); 
-    }, 1000);
- }  
+ let seconds = 0; 
+ let cont = 0; 
+ let timer; 
+ let data;
 
- beggin.addEventListener('click', function(event) {
-    startClock(); 
- })
+	function hour(seconds) {
+		data = new Date(seconds * 1000);
+	 
+		return data.toLocaleTimeString('pt-BR', {
+		  hour12: false,
+		  timeZone: 'GMT'
+		});
+	}  
+
+	function restartClock() {
+		clearInterval(timer);
+		seconds = seconds - seconds;
+		clock.innerHTML = '00:00:00';
+	}
+ 
+	function startClock() {
+	  timer = setInterval(() => {
+		  seconds++; 
+		  clock.innerHTML = hour(seconds); 
+		}, 1000);
+	}   
+
+	beggin.addEventListener('click', function(event) {
+		while(cont!=1){
+		 startClock(); 
+		 cont++;
+		 return; 
+		}
+	});
 
  stoper.addEventListener('click', function(event) {
-    clearInterval(timer); 
- })
+	 clearInterval(timer); 
+	 cont = cont - cont; 
+ });
 
  restart.addEventListener('click', function(event) {
-    restartClock(); 
- })
+	 restartClock(); 
+ });
