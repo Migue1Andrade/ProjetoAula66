@@ -15,21 +15,21 @@ function hour(seconds) {
 		hour12: false,
 		timeZone: 'GMT'
 	});
-}  
+};
 
 function restartClock() {
 	clearInterval(timer);
 
 	seconds = seconds - seconds;
 	clock.innerHTML = '00:00:00';
-}
+};
 
 function startClock() {
 	timer = setInterval(() => {
 		seconds++; 
 		clock.innerHTML = hour(seconds); 
 	}, 1000);
-}
+};
 
 beggin.addEventListener('click', function(event) {		
 	while(cont !==1){
